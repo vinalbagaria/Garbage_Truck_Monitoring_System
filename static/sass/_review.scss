@@ -1,0 +1,112 @@
+/*****************Review part start******************/
+.review_part{
+    position: relative;
+    z-index: 1;
+    .animation_icon_3{
+        position: absolute;
+        top: 0;
+        right: 5%;
+        @media #{$tab}{
+            display: none;
+        }
+    }
+    .review_part_text{
+        .client_info{
+            padding-bottom: 35px;
+            display: flow-root;
+
+            @media #{$tab}{
+                padding-bottom: 15px;
+            }
+            @media #{$medium_device}{
+            
+            }
+            img{
+                height: 90px;
+                width: 90px;
+                float: left;
+                margin-right: 30px;
+                @media #{$tab}{
+                    margin-right: 23px;
+                    height: 50px;;
+                    width: 50px;
+                }
+            }
+            h4{
+                margin-top: 19px;
+                font-weight: 600;
+                @media #{$tab}{
+                    margin-top: 0;
+                    margin-bottom: 5px;
+                }
+            }
+            p{
+                margin-top: 0px;
+            }
+        }
+        p{
+           font-weight: 400i;
+           line-height: 1.929;
+        }
+    }
+    .owl-dots {
+        text-align: center;
+        padding-top: 65px;
+        @media #{$small_mobile}{
+            padding-top: 30px;
+        }
+        @media #{$large_mobile}{
+            padding-top: 30px;
+        }
+        @media #{$tab_device}{
+            padding-top: 30px;
+        }
+        @media #{$medium_device}{
+        
+        }
+        button.owl-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50px;
+            display: inline-block;
+            background: #e9eef2;
+            margin: 0 5px;
+            border: 1px solid $btn_hover;
+            &.active {
+                background-color: $btn_hover;
+            }
+            &:focus {
+                outline: #cfb579;
+            }
+        }
+    }
+    .singler_eview_part{
+        padding: 50px 40px 42px;
+        border: 1px solid #ebf0ff;
+        background-color: $white_color;
+        @include transform_time(.5s);
+        margin-bottom: 25px;
+        &:hover{
+            box-shadow: 0px 10px 50px 0px rgba(221, 221, 221, 0.35);
+            border: 1px solid #fff;
+
+        }
+        @media #{$tab}{
+            padding: 20px;
+        }
+    }
+}
+@media #{$small_mobile}{
+    .about_review{
+        margin-top: 0px;
+    }
+}
+@media #{$large_mobile}{
+
+}
+@media #{$tab_device}{
+
+}
+@media #{$medium_device}{
+
+}

@@ -1,0 +1,169 @@
+
+<!--
+=========================================================
+ Light Bootstrap Dashboard - v2.0.1
+=========================================================
+
+ Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
+ Copyright 2019 Creative Tim (https://www.creative-tim.com)
+ Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
+
+ Coded by Creative Tim
+
+=========================================================
+
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+ {% load static %}
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="utf-8" />
+     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+     <title>Real Time Monitoring</title>
+     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+     <!--     Fonts and icons     -->
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+     <!-- CSS Files -->
+     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+     <link href="{% static 'css/light-bootstrap-dashboard.css ' %}" rel="stylesheet" />
+     <!-- CSS Just for demo purpose, don't include it in your project -->
+     <link href="{% static 'css/demo.css' %}" rel="stylesheet" />
+    <style>
+     #over_map {
+        position: absolute;
+        top: 10px;
+        left: 89%;
+        z-index: 99;
+        background-color: #ccffcc;
+        padding: 10px;
+    }
+</style>
+ </head>
+ 
+ <body>
+
+             <div class="map-container">
+                 <div id="map"></div>
+                 <div id="over_map">
+                    <div>
+                        <span>Trucks On Board: </span><span id="cars">0</span>
+                    </div>
+                </div>
+             </div>
+   
+ </body>
+ <!--   Core JS Files   -->
+ <script src="{% static 'js/core/jquery.3.2.1.min.js' %}" type="text/javascript"></script>
+ <script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
+ <script src="{% static 'js/core/bootstrap.min.js' %}" type="text/javascript"></script>
+ <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+ <script src="{% static 'js/plugins/bootstrap-switch.js' %}></script>
+ <!--  Google Maps Plugin    -->
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+ <!--  Chartist Plugin  -->
+ <script src="{% static 'js/plugins/chartist.min.js' %}"></script>
+ <!--  Notifications Plugin    -->
+ <script src="{% static 'js/plugins/bootstrap-notify.js' %}"></script>
+ <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+ <script src="{% static 'js/light-bootstrap-dashboard.js' %} " type="text/javascript"></script>
+ <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+ <script src="{% static 'js/demo.js' %}"></script>
+ <script type="text/javascript">
+     $(document).ready(function() {
+         // Javascript method's body can be found in assets/js/demos.js
+         demo.initGoogleMaps();
+ 
+     });
+ </script>
+ <!-- jQuery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <!-- Firebase -->
+ <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+ <script>
+     // Replace your Configuration here..
+     var config = {
+         apiKey: "AIzaSyB6s7DSe9M6MZk7g77cMTuoqIO6d-ebKwI",
+         authDomain: "garbage-truck-monitoring.firebaseapp.com",
+         databaseURL: "https://garbage-truck-monitoring.firebaseio.com",
+         projectId: "garbage-truck-monitoring",
+         storageBucket: "garbage-truck-monitoring.appspot.com",
+         messagingSenderId: "549306067582",
+         appId: "1:549306067582:web:bbaeac9ec829045099c62f",
+         measurementId: "G-X9JCRW3TR0"
+       };
+     firebase.initializeApp(config);
+ </script>
+
+ <script>
+
+     // counter for online cars...
+     var cars_count = 0;
+
+     // markers array to store all the markers, so that we could remove marker when any car goes offline and its data will be remove from realtime database...
+     var markers = [];
+     var map;
+     function initMap() { // Google Map Initialization... 
+         map = new google.maps.Map(document.getElementById('map'), {
+             zoom: 16,
+             center: new google.maps.LatLng(18.5697418,73.989927),
+             mapTypeId: 'terrain'
+         });
+     }
+
+     // This Function will create a car icon with angle and add/display that marker on the map
+     function AddCar(data) {
+
+         console.log("method called")
+
+         var uluru = { lat: parseFloat(data.val().latitude), lng: parseFloat(data.val().longitude) };
+         console.log(data.val().latitude,  uluru.lng)
+         var marker = new google.maps.Marker({
+             position: uluru,
+             map: map
+         });
+
+         markers[data.key] = marker; // add marker in the markers array...
+         document.getElementById("cars").innerHTML = cars_count;
+     }
+     var d = new Date()
+     var month = d.getMonth() +1;
+     month = ('0' + month).slice(-2)
+
+     var date = d.getFullYear() + "-" + month + "-" + d.getDate() 
+     // get firebase database reference...
+     console.log(date)
+     var cars_Ref = firebase.database().ref('RealTimeMonitoring/' + date + "/");
+     console.log(cars_Ref)
+     // this event will be triggered when a new object will be added in the database...
+     cars_Ref.on('child_added', function (data) {
+         console.log("in method added")
+         cars_count++;
+         AddCar(data);
+     });
+
+     // this event will be triggered on location change of any car...
+     cars_Ref.on('child_changed', function (data) {
+         console.log("in method cheng")
+         markers[data.key].setMap(null);
+         AddCar(data);
+     });
+
+     // If any car goes offline then this event will get triggered and we'll remove the marker of that car...  
+     cars_Ref.on('child_removed', function (data) {
+         markers[data.key].setMap(null);
+         cars_count--;
+         document.getElementById("cars").innerHTML = cars_count;
+     });
+
+ </script>
+
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3W-x4zqHwfCJ2xgzLvuO1MVPlWwp_XJI&callback=initMap">
+ </script>
+ 
+ </html>
+ 

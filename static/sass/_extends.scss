@@ -1,0 +1,43 @@
+/**************** extend css start ****************/
+%custom_btn_bg_1{
+    background-image: linear-gradient(to left, #ee390f 0%, #f9b700 51%, #ee390f 100%);  
+}
+
+%custom_btn_bg_2{
+    background-image: -moz-linear-gradient( 0deg, rgb(238,57,15) 0%, rgb(249,183,0) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgb(238,57,15) 0%, rgb(249,183,0) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgb(238,57,15) 0%, rgb(249,183,0) 100%);
+}
+%custom_btn_bg_3{
+    background: -moz-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -webkit-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -ms-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    box-shadow: 0px 8px 15px 0px rgba(180, 41, 248, 0.25);
+    
+}
+%rank_bg{
+    background: -moz-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+    background: -webkit-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+    background: -ms-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+    box-shadow: 0px 10px 20px 0px rgba(196, 113, 245, 0.3);
+}
+  
+%overlay_bg{
+    background: -moz-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+    background: -webkit-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+    background: -ms-linear-gradient( 16deg, rgb(250,113,205) 0%, rgb(181,77,243) 100%);
+}
+%pricing_btn_bg_bg {
+    background: -moz-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -webkit-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -ms-linear-gradient( 90deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    box-shadow: 0px 8px 15px 0px rgba(180, 41, 248, 0.25);
+}
+  
+%icon_bg{
+    background: -moz-linear-gradient( 45deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -webkit-linear-gradient( 45deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+    background: -ms-linear-gradient( 45deg, rgb(173,35,254) 0%, rgb(250,96,199) 100%);
+}
+
+/**************** extend css start ****************/

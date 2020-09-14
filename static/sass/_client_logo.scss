@@ -1,0 +1,27 @@
+/************client css start***************/
+.client_logo{
+    background-color: #f8faff;
+    position: relative;
+    
+    @media #{$tab}{
+        background-color: transparent !important;
+    }
+    .single_client_logo{
+        display: flex;
+        align-items: center;
+    }
+    .owl-carousel .owl-item img {
+        width: auto;
+    }
+    .single_client_logo{
+        height: 150px;
+        @media #{$tab}{
+            height: 50px;
+            margin-top: 50px;
+        }
+        img{
+            margin: 0 auto;
+        }
+
+    }
+}

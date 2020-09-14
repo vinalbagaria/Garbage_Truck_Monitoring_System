@@ -1,0 +1,69 @@
+/**************cta area start*****************/
+.cta_part{
+    position: relative;
+    z-index: 1;
+    @include background("../img/cta_bg.png");
+    text-align: center;
+    padding: 170px 0px;
+    @media #{$small_mobile}{
+        padding: 70px 0px;
+    }
+    @media #{$large_mobile}{
+        padding: 70px 0px;
+    }
+    @media #{$tab_device}{
+        padding: 70px 0px;
+    }
+    @media #{$medium_device}{
+        
+    }
+    &:after{
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $btn_hover;
+        opacity: 0.9;
+        z-index: -1;
+    }
+    h1{
+        font-size: 55px;
+        font-weight: 600;
+        color: $white_color;
+        margin-bottom: 15px;
+        line-height: 68px;
+        @media #{$small_mobile}{
+            font-size: 25px;
+            line-height: 35px;
+        }
+        @media #{$large_mobile}{
+            font-size: 30px;
+            line-height: 35px;
+        }
+        @media #{$tab_device}{
+            font-size: 30px;
+            line-height: 35px;
+        }
+        @media #{$medium_device}{
+            font-size: 35px;
+            line-height: 45px;
+        }
+    }
+    p{
+        color: $white_color;
+
+    }
+    .btn_1{
+        margin-top: 45px;
+        @media #{$tab}{
+            margin-top: 15px;
+        }
+        @media #{$medium_device}{
+            margin-top: 15px;
+        }
+    }
+}
+
+  

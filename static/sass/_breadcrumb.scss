@@ -1,0 +1,68 @@
+.breadcrumb_bg {
+	@include background("../img/breadcrumb.png");
+}
+
+.breadcrumb {
+	position: relative;
+	z-index: 1;
+	height: 450px;
+	&:after {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #001b5e;
+		content: "";
+		opacity: 0.7;
+		z-index: -1;
+	}
+
+	.breadcrumb_tittle {
+		p{
+			text-transform: capitalize;
+			font-size: 16px;
+			color: #fff;
+		}
+		h2 {
+			color: $white_color;
+			font-size: 60px;
+			font-weight: 700;
+			margin-top: 10px;
+			text-transform: capitalize;
+
+			@media #{$small_mobile} {
+				font-size: 35px;
+			}
+
+			@media #{$large_mobile} {
+				font-size: 35px;
+			}
+
+			@media #{$tab_device} {
+				font-size: 40px;
+			}
+
+			@media #{$medium_device} {}
+		}
+	}
+	.breadcrumb_content{
+		@media #{$small_mobile} {
+			float: left;
+			text-align: left !important;
+		}
+		p {
+			font-size: 15px;
+			color: $white_color;
+		}
+
+		span {
+			margin: 0px 5px;
+			font-size: 12px;
+		}
+	}
+}
+
+.breadcrumb {
+	margin: 0px !important;
+}

@@ -1,0 +1,207 @@
+/************Team css start***************/
+.about_part {
+  position: relative;
+  z-index: 99;
+  background-repeat: no-repeat;
+  background-position: left;
+  @media #{$tab} {
+    background-image: none;
+    padding: 70px 0 0;
+  }
+  @media #{$medium_device} {
+    background-image: none;
+  }
+  .about_part_text {
+    @media #{$tab} {
+      padding-left: 0;
+    }
+
+    @media #{$medium_device} {
+      padding-left: 0;
+    }
+
+    h5 {
+      color: $btn_bg;
+      font-size: 16px;
+      font-weight: 500;
+      position: relative;
+      text-transform: capitalize;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 56px;
+      margin-bottom: 21px;
+      position: relative;
+      @media #{$tab} {
+        font-size: 25px;
+        margin-bottom: 10px;
+        line-height: 35px;
+        margin-top: 15px;
+      }
+
+      @media #{$medium_device} {
+        font-size: 28px;
+        margin-bottom: 20px;
+        line-height: 40px;
+      }
+    }
+
+    p {
+      margin-bottom: 50px;
+
+      @media #{$tab} {
+        margin-bottom: 20px;
+      }
+
+      @media #{$medium_device} {}
+    }
+   
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-top: 42px;
+      @media #{$small_mobile} {
+        margin-bottom: 10px;
+      }
+
+      @media #{$large_mobile} {
+        margin-bottom: 20px;
+      }
+
+      @media #{$tab_device} {
+        margin-bottom: 20px;
+      }
+
+      @media #{$medium_device} {}
+
+      li {
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 14px;
+        padding-left: 80px;
+        padding-top: 30px;
+        color: $font_8;
+        position: relative;
+        @media #{$tab} {
+          padding-left: 41px;
+          padding-top: 5px;
+          margin-bottom: 0;
+        }
+
+        @media #{$medium_device} {
+          padding-left: 41px;
+          padding-top: 5px;
+          margin-bottom: 0;
+        }
+
+        span {
+          margin-right: 17px;
+          font-size: 50px;
+          position: absolute;
+          left: 0;
+          top: 20px;
+          color: $btn_bg;
+
+          @media #{$tab} {
+            padding-bottom: 15px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 35px;
+          }
+
+          @media #{$medium_device} {
+            padding-bottom: 15px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 35px;
+          }
+        }
+      }
+    }
+
+    .btn_1 {
+      margin-top: 6px;
+    }
+  }
+  .about_part_img{
+    @media #{$tab} {
+      margin-top: 30px;
+    }
+  }
+}
+.experiance_part{
+  background-image: url(../img/experiance_overlay.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  @media #{$tab}{
+    background-image: none;
+    .about_part_img{
+      margin-top: 20px;
+    }
+  }
+  @media #{$medium_device}{
+    background-image: none;
+    .about_part_img{
+      margin-top: 20px;
+    }
+  }
+  .about_text_iner{
+    margin-top: 72px;
+    display: flex;
+    align-items: center;
+    .about_text_counter{
+      background-image: url(../img/heading_bg.png);
+      background-size: contain;
+      background-position: left;
+      background-repeat: no-repeat;
+      h2{
+        font-size: 150px;
+        line-height: 120px;
+        display: inline-block;
+        color: $btn_bg;
+        padding-right: 35px;
+        border-right: 1px solid $font_1;
+        font-weight: 700;
+        margin-bottom: 0;
+        @media #{$tab}{
+          font-size: 75px;
+          line-height: 80px;
+          margin-top: 0;
+        }
+      }
+    }
+    .about_iner_content{
+      
+      text-transform: capitalize;
+      margin-left: 35px;
+      
+      h3{
+        color: $font_1;
+        display: inline-block;
+        @media #{$tab}{
+          font-size: 20px;
+        }
+      }
+      span{
+        color: $heading_color;
+        display: block;
+      }
+    }
+  }
+}
+.single_experiance_section{
+  margin-top: 0;
+  margin-bottom: 140px;
+  @media #{$tab}{
+    margin-bottom: 70px;
+  }
+  @media #{$medium_device}{
+    margin-bottom: 80px;
+  }
+}

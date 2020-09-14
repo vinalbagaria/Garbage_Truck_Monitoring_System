@@ -1,0 +1,57 @@
+/**************** service_part css start ****************/
+.member_counter {
+    .single_counter_icon{
+        img{
+            width: 60px;
+            @media #{$tab} {
+                
+            }
+        }
+    }
+    .single_member_counter {
+        margin-top: 35px;
+        @media #{$tab} {
+            margin: 10px 0 20px;
+            display: inline-block;
+        }
+        span {
+            font-size: 60px;
+            font-weight: 700;
+            color: $base_color;
+            font-style: $font_stack_2;
+            display: inline-block;
+            float: left;
+            padding-right: 30px;
+            line-height: 57px;
+            @media #{$tab} {
+                line-height: 67px;
+                font-size: 40px;
+            }
+
+            @media #{$medium_device} {
+                line-height: 67px;
+                font-size: 40px;
+            }
+        }
+
+        h4 {
+            font-size: 30px;
+            font-weight: 600;
+            text-transform: capitalize;
+            position: relative;
+            display: grid;
+            float: left;
+            @media #{$tab}{
+                font-size: 25px;
+            }
+            span{
+                font-size: 16px;
+                color: #83868c;
+                display: block;
+                line-height: 20px;
+                text-transform: capitalize;
+                margin-bottom: 4px;
+            }
+        }
+    }
+}

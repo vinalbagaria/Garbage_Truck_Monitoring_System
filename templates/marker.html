@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Status of Bin Garbage Level</title>
+</head>
+<body>
+<style>
+    html, body, #map
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map
+    {
+        position: relative;
+    }
+</style>
+<div id="map" ></div>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyB6s7DSe9M6MZk7g77cMTuoqIO6d-ebKwI",
+        authDomain: "garbage-truck-monitoring.firebaseapp.com",
+        databaseURL: "https://garbage-truck-monitoring.firebaseio.com",
+        projectId: "garbage-truck-monitoring",
+        storageBucket: "garbage-truck-monitoring.appspot.com",
+        messagingSenderId: "549306067582",
+        appId: "1:549306067582:web:bbaeac9ec829045099c62f",
+        measurementId: "G-X9JCRW3TR0"
+    };
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
+</script>
+<script type="text/javascript">
+    function initMap()
+    {
+        var cap_20 = {{ cap_20|safe }};
+        var cap_20_70 = {{ cap_20_70|safe }};
+        var cap_70 = {{ cap_70|safe }};
+        console.log(cap_20,cap_20_70,cap_70)
+        var map = new google.maps.Map(document.getElementById('map'),
+            {
+                zoom: 14,center: new google.maps.LatLng(18.5680052,73.9873692),mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        var infowindow = new google.maps.InfoWindow();
+        var marker1, i, marker,marker2;
+        for (i = 0; i < cap_20.length; i++)
+        {
+            console.log(cap_20[i][0], cap_20[i][1])
+            marker2 = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(cap_20[i][0], cap_20[i][1]),
+                    map: map,
+                    icon: "{% static 'img/green_bin.jpg' %}"
+                });
+        }
+
+
+        for (i = 0; i < cap_70.length; i++)
+        { console.log(cap_70[i][0], cap_70[i][1])
+            marker1 = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(cap_70[i][0], cap_70[i][1]),
+                    map: map,
+                    icon: "{% static 'img/red_bin (2).jpg' %}"
+                });
+        }
+
+
+        for (i = 0; i < cap_20_70.length; i++)
+        {   marker = new google.maps.Marker(
+            {
+                position: new google.maps.LatLng(cap_20_70[i][0], cap_20_70[i][1]),
+                map: map,
+                icon: "{% static 'img/yellow_bin.jpg' %}",
+                lat_id : cap_20_70[i][0],
+                lon_id : cap_20_70[i][1],
+            });
+
+            google.maps.event.addListener(marker, 'click', function()
+            {
+                var h1 = 0;
+                var h2 = 0;
+                var c2 = 0;
+                var marker = this;
+                var lati = this.lat_id.toString().replace('.','-');
+                var longi = this.lon_id.toString().replace('.','-');
+                var latlongi = lati.concat("|").concat(longi);
+                console.log(lati,longi,latlongi);
+                var ref = firebase.database().ref("RealTimeBinLevel/"+latlongi);
+                ref.once("value", function(snapshot) {
+                    h2 = snapshot.val().height;
+                    h2 = parseFloat(h2);
+                    h2 += 2;
+
+                    var ref2 = firebase.database().ref("Bin/"+latlongi);
+                    ref2.once("value", function(snapshot) {
+                        h1 = snapshot.val().height;
+                        c2 = snapshot.val().capcity;
+                        h1 = parseFloat(h1);
+                        c2 = parseFloat(c2);
+
+                        c2 += 38;
+                        var perc = h2/h1 * 100;
+                        var d = new Date();
+                        var month = d.getMonth() + 1;
+                        month = ('0' + month).slice(-2);
+                        var datee = d.getFullYear()+"-"+month+"-"+d.getDate();
+                        var timee = (d.getHours()+':'+d.getMinutes());
+                        console.log(h2,h1,c2);
+                        firebase.database().ref("BinPerLevel/"+ latlongi + "/" + datee + "/" + timee + "/height").set(h2.toString());
+                        firebase.database().ref("Bin/"+ latlongi).update({capcity : c2.toString()});
+
+                        console.log(h1,h2,perc);
+                        if (20<perc<70)
+                        {
+                            marker.setIcon("{% static 'img/yellow_bin.jpg' %}");
+                        }
+                        if (perc <= 20)
+                        {
+                            marker.setIcon("{% static 'img/green_bin.jpg' %}");
+                        }
+                        if (perc >= 70)
+                        {
+                            marker.setIcon("{% static 'img/red_bin (2).jpg' %}");
+
+                        }
+
+                    });
+                });
+
+
+
+
+                infowindow.open(map);
+            });
+
+        }
+    }
+
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6s7DSe9M6MZk7g77cMTuoqIO6d-ebKwI&callback=initMap">
+
+</script>
+</body>
+</html>

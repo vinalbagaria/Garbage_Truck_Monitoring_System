@@ -1,0 +1,108 @@
+<h1>Hello</h1>
+<h1>Hwyyyyyyyy</h1>
+<!-- <h2>{{current}}</h2>
+<h4>{{bins_data}}</h4> -->
+
+<h2 id="id"></h2>
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="{% static '/img/favicon.ico' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<!--     Fonts and icons     -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+	<!-- CSS Files -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/light-bootstrap-dashboard.css ' %}" rel="stylesheet" />
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link href="{% static 'css/demo.css' %}" rel="stylesheet" />
+   <style>
+	#over_map {
+	   position: absolute;
+	   top: 10px;
+	   left: 89%;
+	   z-index: 99;
+	   background-color: #ccffcc;
+	   padding: 10px;
+   }
+</style>
+</head>
+
+<script>
+function closestLocation(targetLocation, locationData) {
+   function vectorDistance(dx, dy) {
+	   return Math.sqrt(dx * dx + dy * dy);
+   }
+
+   function locationDistance(location1, location2) {
+	   var dx = location1.latitude - location2.latitude,
+		   dy = location1.longitude - location2.longitude;
+
+	   return vectorDistance(dx, dy);
+   }
+
+   return locationData.reduce(function(prev, curr) {
+	   var prevDistance = locationDistance(targetLocation , prev),
+		   currDistance = locationDistance(targetLocation , curr);
+	   return (prevDistance < currDistance) ? prev : curr;
+   });
+}
+
+var data = {
+   "Locations": {
+	   "Location": [
+		   {
+		   "id": "3066",
+		   "latitude": "57.6494",
+		   "longitude": "-3.5606",
+		   "name": "Kinloss"},
+	   {
+		   "id": "3080",
+		   "latitude": "57.077",
+		   "longitude": "-2.836",
+		   "name": "Aboyne"},
+	   {
+		   "id": "3091",
+		   "latitude": "57.206",
+		   "longitude": "-2.202",
+		   "name": "Aberdeen Dyce"},
+	   {
+		   "id": "3134",
+		   "latitude": "55.907",
+		   "longitude": "-4.533",
+		   "name": "Glasgow/Bishopton"},
+	   {
+		   "id": "3136",
+		   "latitude": "55.515",
+		   "longitude": "-4.585",
+		   "name": "Prestwick Rnas"},
+	   {
+		   "id": "3144",
+		   "latitude": "56.326",
+		   "longitude": "-3.729",
+		   "name": "Strathallan"}
+	   ]
+   }
+},
+   targetLocation = {
+
+	   latitude: 19.006754,
+	   longitude: 72.234567
+   },
+   closest = closestLocation(targetLocation, data.Locations.Location);
+   console.log("closet" , closest)
+   doc = document.getElementById("id").innerHTML(closest);
+
+
+</script>

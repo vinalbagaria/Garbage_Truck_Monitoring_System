@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routes</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map-canvas {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY">
+    </script>
+</head>
+<body>
+<h1>Routes</h1>
+<p>{{ route }}</p>
+<div id="map-canvas" style="width: 500px; height: 400px;"></div>
+<a href="/showvehicles/"><button>Vehicle Wise Routes</button></a>
+
+<script>
+    var stepDisplay;
+
+
+
+
+
+    var dirService = new google.maps.DirectionsService();
+    var map;
+    var allLongLat = {{ route |safe|escape}};
+    var sourceDefault = new google.maps.LatLng(allLongLat[{{ veh1 }}][0][0],allLongLat[{{ veh1 }}][0][1]);
+    {#console.log(sourceDefault);#}
+    var mapOptions = {
+        zoom:14,
+        center:sourceDefault
+        };
+    map =  new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+    stepDisplay = new google.maps.InfoWindow();
+
+    let markersArray = [];
+    function calRoute(listener) {
+        var index = 0;
+        var request = [];
+        var geocodedArr = ['e'];
+        var routesArr = ['f'];
+        for (var key in allLongLat) {
+
+
+               for (i = 0; i < markersArray.length; i++) {
+                   markersArray[i].setMap(null);
+            }
+            var value = allLongLat[key];
+            {#console.log(value);#}
+            {#console.log(value[value.length - 1]);#}
+            var sLat = value[0][0];
+            var sLong = value[0][1];
+            var dLat = value[value.length - 1][0];
+            var dLong = value[value.length - 1][1];
+            var src = new google.maps.LatLng(sLat, sLong);
+            var dest = new google.maps.LatLng(dLat, dLong);
+            {#addMarker({lat: parseInt(sLat), lng: parseInt(sLong)}, "red");#}
+            var waypts = [];
+            var i;
+            for (i = 1; i < value.length - 1; i++) {
+                var lat = value[i][0];
+                var long = value[i][1];
+                {#addMarker({lat: parseInt(lat), lng: parseInt(long)}, "yellow");#}
+                waypts.push({
+                    location: new google.maps.LatLng(lat, long),
+                    stopover: true
+                });
+            }
+
+            request = {
+                'origin': src,
+                'destination': dest,
+                'travelMode': 'DRIVING',
+                'waypoints': waypts,
+            };
+            var rendererOptions = {
+                preserveViewport: true,
+                supressmarkers:false,
+                //routeIndex:index
+            };
+            index = index + 1;
+             var dirDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+             dirDisplay.setMap(map);
+
+
+            dirService.route(request, function (result, status) {
+                    if (status == 'OK') {
+                       dirDisplay.setDirections(result);
+                       //console.log(result.geocoded_waypoints);
+                        {#var a = result.geocoded_waypoints;#}
+                        {#geocodedArr.concat(a);#}
+                        {#routesArr.concat(result.routes);#}
+                        {#console.log(geocodedArr);#}
+                        {#console.log(routesArr);#}
+                        {#//console.log(result);#}
+
+                    }
+
+                }
+            );
+        }
+
+        var resultGlobal = {"geocoded_waypoints":geocodedArr,"routes":routesArr,"status":"OK"};
+        //dirDisplay.setDirections(resultGlobal);
+
+    }
+
+    function addMarker(latLng, color) {
+          let url = "http://maps.google.com/mapfiles/ms/icons/";
+          url += color + "-dot.png";
+
+          let marker = new google.maps.Marker({
+            map: map,
+            position: latLng,
+            icon: {
+              url: url
+            }
+          });
+          //store the marker object drawn in global array
+          markersArray.push(marker);
+        }
+    document.getElementById('get').onclick = function () {
+        calRoute();
+        {#showDirections();#}
+    };
+
+
+</script>
+
+</body>
+</html>

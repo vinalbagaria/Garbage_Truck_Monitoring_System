@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<style>
+        div{
+        position : absolute;
+        right : 10px;
+        top : 5px
+        }
+    </style>
+</head>
+<body>
+<div>
+<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
+</div>
+<h2>Queries</h2>
+
+<br><br>
+
+
+{% for name,address,query,date,citizen_id in comb_lis_query %}
+    <h4>Name: {{name}}  &nbsp; Citizen: {{citizen_id}} &nbsp; Address: {{address}} &nbsp; Query:{{query}} &nbsp; Date:{{date}}</h4>
+    <!-- <img src="{{image}}" alt="" widht="300px" height="300px"><br> -->
+    <br>
+    <form action="/updateFeedback/" method="POST">
+        {% csrf_token %}
+        <input type="text" value="{{citizen_id}}-{{date}}" name="id" hidden> 
+        <input type="text" name="feedback" id="" placeholder="Feedback" size="50" Multiline = true>
+        <button type="submit" name="">Send</button>
+    </form>
+
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+</head>
+<body>
+{% if  capErr  == '1'%}
+    <p>The garbage to be collected is more than the capacity of all trucks combined increase the number of trucks of cumulative capacity{{ cap_diff }}</p>
+{% else %}
+    <p>The routes cannot be generated</p>
+{% endif %}
+</body>
+</html>

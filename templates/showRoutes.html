@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routes</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map-canvas {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY">
+    </script>
+</head>
+<body>
+<h1>Routes</h1>
+<p>{{ vId }}</p>
+<div id="map-canvas" style="width: 500px; height: 400px;"></div>
+<a><button id="get">Get Routes</button></a>
+
+
+<script>
+    var stepDisplay;
+    {#var stepDisplay;#}
+    var dirService = new google.maps.DirectionsService();
+    var map;
+    var value = {{ route |safe|escape}};
+    var sourceDefault = new google.maps.LatLng(value[0]["latitude"],value[0]["longitude"]);
+    console.log(value[0]["longitude"]);
+    console.log(value[0]["latitude"]);
+    var mapOptions = {
+        zoom:14,
+        center:sourceDefault
+        };
+    map =  new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+    stepDisplay = new google.maps.InfoWindow();
+
+    let markersArray = [];
+    function calRoute(listener) {
+            var sLat = value[0]["latitude"];
+            var sLong = value[0]["longitude"];
+            var dLat = value[value.length - 1]["latitude"];
+            var dLong = value[value.length - 1]["longitude"];
+            var src = new google.maps.LatLng(sLat, sLong);
+            var dest = new google.maps.LatLng(dLat, dLong);
+            {#addMarker({lat: parseInt(sLat), lng: parseInt(sLong)}, "red");#}
+            var waypts = [];
+            var i;
+            for (i = 1; i < value.length - 1; i++) {
+                var lat = value[i]["latitude"];
+                var long = value[i]["longitude"];
+                {#addMarker({lat: parseInt(lat), lng: parseInt(long)}, "yellow");#}
+                waypts.push({
+                    location: new google.maps.LatLng(lat, long),
+                    stopover: true
+                });
+            }
+            request = {
+                'origin': src,
+                'destination': dest,
+                'travelMode': 'DRIVING',
+                'waypoints': waypts,
+            };
+
+             var dirDisplay = new google.maps.DirectionsRenderer();
+
+            dirService.route(request, function (result, status) {
+                    if (status == 'OK') {
+                       dirDisplay.setDirections(result);
+
+                    }
+
+                }
+            );
+            dirDisplay.setMap(map)
+    }
+
+    document.getElementById('get').onclick = function () {
+        calRoute();
+    };
+
+
+</script>
+
+</body>
+</html>

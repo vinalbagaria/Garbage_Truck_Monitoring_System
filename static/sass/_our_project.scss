@@ -1,0 +1,152 @@
+/**************** our_offer css start ****************/
+
+.our_project {
+    position: relative;
+    .animation_icon_2{
+        position: absolute;
+        top: 0;
+        left: 5%;
+        @media #{$tab}{
+            display: none;
+        }
+    }
+    .project_menu_item{
+        @media #{$tab} {
+            margin: 0 0 20px;
+        }
+        ul{
+            li{
+                display: inline-block;
+                color: #83868c;
+                font-weight: 500;
+                font-size: 15px;
+                text-transform: capitalize;
+                margin: 0 22px;
+                cursor: pointer;
+                @media #{$tab} {
+                    margin: 0 8px;
+                }
+                &:hover{
+                    color: $btn_bg;
+                }
+            }
+        }
+        .active{
+            color: $btn_bg;
+        }
+    }
+    .more_btn_iner{
+        display: inline-block;
+        border: 1px solid $base_color;
+        padding: 15px 40px;
+        color: $base_color;
+        font-size: 15px;
+        text-transform: capitalize;
+        border-radius: 50px;
+        @include transform_time(.5s);
+        @media #{$tab}{
+            padding: 8px 24px;
+            margin-bottom: 25px;
+            float: right;
+        }
+        &:hover{
+            background-color: $base_color;
+            color: $white_color;
+        }
+    }
+    .single_our_project {
+        @media #{$small_mobile}{
+            margin-bottom: 20px;
+        }
+        @media #{$large_mobile}{
+            margin-bottom: 20px;
+        }
+        @media #{$tab_device}{
+            margin-bottom: 20px;
+        }
+        @media #{$medium_device}{
+        
+        }
+        &:hover {
+            .single_offer {
+                .hover_text {
+                    opacity: 1;
+                    left: 15px;
+                    right: 15px;
+                }
+            }
+        }
+    }
+
+    .single_our_project {
+        position: relative;
+        z-index: 1;
+
+        .single_offer {
+            position: relative;
+            z-index: 3;
+
+            img {
+                width: 100%;
+                height: auto;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hover_text {
+                position: absolute;
+                bottom: 0;
+                z-index: 100;
+                opacity: 0;
+                @include transform_time(0.5s);
+                background-color: $white_color;
+                padding: 20px 30px;
+                left: 15px;
+                right: 15px;
+                img {
+                    max-width: 39px;
+                    max-height: 48px;
+                    margin-bottom: 26px;
+                }
+
+                h2 {
+                    color: $black_color;
+                    font-size: 24px;
+                }
+
+                p {
+                    color: #848484;
+                    font-size: 15px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+    @media #{$tab}{
+        .section_tittle{
+            margin-bottom: 20px;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.single_page_project{
+    .portfolio-filter{
+        margin-bottom: 80px;
+        @media #{$tab}{
+            margin-bottom: 30px;
+        }
+        @media #{$medium_device}{
+            margin-bottom: 40px;
+        }
+    }
+    .single_our_project{
+        margin-bottom: 30px;
+        @media #{$tab}{
+            margin-bottom: 15px;
+        }
+    }
+}
+
+/**************** our_offer css end ****************/

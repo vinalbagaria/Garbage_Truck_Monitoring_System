@@ -1,0 +1,168 @@
+/******************* testimonial part css88********************/
+.testimonial_part{
+    overflow: hidden;
+    .section_tittle {
+        margin-bottom: 80px;
+        @media #{$small_mobile}{
+            margin-bottom: 50px;
+        }
+        @media #{$large_mobile}{
+            margin-bottom: 50px;
+        }
+        @media #{$tab_device}{
+            margin-bottom: 50px;
+        }
+        @media #{$medium_device}{
+        
+        }
+    }
+    .textimonial_iner{
+        margin-left: 13%;
+        overflow: hidden;
+        @media #{$small_mobile}{
+            margin-left: 0;
+        }
+        @media #{$large_mobile}{
+            margin-left: 0;
+        }
+        @media #{$tab_device}{
+            margin-left: 0;
+        }
+        @media #{$medium_device}{
+            margin-left: 0;
+        }
+    }
+    .testimonial_slider{
+        margin: 30px;
+        @media #{$small_mobile}{
+            margin: 0px;
+        }
+        @media #{$large_mobile}{
+            margin: 0px;
+        }
+        @media #{$tab_device}{
+            margin: 0px;
+        }
+        @media #{$medium_device}{
+        
+        }
+    }
+    .testimonial_slider_text {
+        padding: 50px;
+        background-color: #fff;
+        box-shadow: 0px 10px 30px 0px rgba(12, 46, 96, 0.1);
+        position: relative;
+        z-index: 1;
+        @media #{$small_mobile}{
+            padding: 5px 0px;
+        }
+        @media #{$large_mobile}{
+            padding: 5px 20px;
+        }
+        @media #{$tab_device}{
+            padding: 5px 20px;
+        }
+        @media #{$medium_device}{
+        
+        }
+        &:after{
+            position: absolute;
+            right: 16%;
+            top: 59px;
+            width: 148px;
+            height: 124px;
+            background-image: url(../img/quote.png);
+            content: "";
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1;
+            @media #{$small_mobile}{
+                width: 53px;
+                height: 45px;
+                right: 25%;
+                top: 30px;
+            }
+            @media #{$large_mobile}{
+                width: 53px;
+                height: 45px;
+                right: 25%;
+                top: 30px;
+            }
+            @media #{$tab_device}{
+                width: 53px;
+                height: 45px;
+                right: 25%;
+                top: 30px;
+            }
+            @media #{$medium_device}{
+            
+            }
+        }
+          
+    }
+    .owl-dots {
+        text-align: center;
+        padding-top: 67px;
+        margin-left: -26%;
+        line-height: 0px;
+        @media #{$small_mobile}{
+            margin-left: 0;
+            padding-top: 20px;
+        }
+        @media #{$large_mobile}{
+            margin-left: 0;
+            padding-top: 20px;
+        }
+        @media #{$tab_device}{
+            margin-left: 0;
+            padding-top: 20px;
+        }
+        @media #{$medium_device}{
+            margin-left: 0;
+            padding-top: 20px;
+        }
+        button.owl-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #d7d7d7;
+            margin: 0 10px;
+            
+            &.active {
+                background-color: #ff663b;
+                width: 17px;
+                border-radius: 50px;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    
+    .testimonial_slider{
+        @media #{$large_mobile}{
+            margin: 0px 20px;
+        }
+        @media #{$tab_device}{
+            margin: 0px 20px;
+        }
+        p {
+            font-size: 15px;
+            font-style: italic;
+        }
+    }
+    
+    
+    h4 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    h5{
+        font-size: 14px;
+        font-family: $font_stack_1;
+        color: $font_8;
+    }
+}

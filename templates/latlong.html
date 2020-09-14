@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Markers</title>
+  </head>
+  <body>
+  <style>
+    html, body, #map
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map
+    {
+        position: relative;
+    }
+    </style>
+  <div id="map" ></div>
+
+  <script type="text/javascript">
+     function initMap()
+     {
+         var cap_20 = {{ cap_20|safe }};
+         var cap_20_70 = {{ cap_20_70|safe }};
+         var cap_70 = {{ cap_70|safe }};
+         console.log(cap_20,cap_20_70,cap_70)
+         var map = new google.maps.Map(document.getElementById('map'),
+         {
+            zoom: 14,center: new google.maps.LatLng(19.8762, 75.3433),mapTypeId: google.maps.MapTypeId.ROADMAP
+         });
+         var infowindow = new google.maps.InfoWindow();
+         var marker, i;
+         for (i = 0; i < cap_20.length; i++)
+            {
+                console.log(cap_20[i][0], cap_20[i][1])
+                marker = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(cap_20[i][0], cap_20[i][1]),
+                    map: map,
+                    icon: "{% static 'img/red_bin (2).jpg' %}"
+                });
+            }
+
+                 for (i = 0; i < cap_20_70.length; i++)
+            {   console.log(cap_20_70[i][0], cap_20_70[i][1])
+                marker = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(cap_20_70[i][0], cap_20_70[i][1]),
+                    map: map,
+                    icon: "{% static 'img/green_bin.jpg' %}"
+                });
+            }
+
+         for (i = 0; i < cap_70.length; i++)
+            { console.log(cap_70[i][0], cap_70[i][1])
+                marker = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(cap_70[i][0], cap_70[i][1]),
+                    map: map,
+                    icon: "{% static 'img/WhatsApp Image 2020-01-13 at 5.35.31 PM.jpg' %}"
+                });
+            }
+
+     }
+
+</script>
+   <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap">
+
+    </script>
+  </body>
+</html>

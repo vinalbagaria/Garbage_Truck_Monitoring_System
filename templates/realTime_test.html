@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Real Time Monitoring</title>
+        <style>
+            #map {
+                height: 100%;
+            }
+
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #over_map {
+                position: absolute;
+                top: 10px;
+                left: 89%;
+                z-index: 99;
+                background-color: #ccffcc;
+                padding: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="map"></div>
+
+        <div id="over_map">
+            <div>
+                <span>Trucks: </span><span id="cars">0</span>
+            </div>
+        </div>
+
+        <!-- jQuery CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script>
+            // Replace your Configuration here..
+            config = {
+                'apiKey': "AIzaSyA3W-x4zqHwfCJ2xgzLvuO1MVPlWwp_XJI",
+                'authDomain' : "garbage-truck-monitoring.firebaseapp.com",
+                'databaseURL' : "https://garbage-truck-monitoring.firebaseio.com",
+                'projectId' : "garbage-truck-monitoring",
+                'storageBucket' : "garbage-truck-monitoring.appspot.com",
+                'messagingSenderId' : "549306067582",
+                'appId' : "1:549306067582:web:bbaeac9ec829045099c62f",
+                'measurementId' : "G-X9JCRW3TR0"
+            }
+            firebase.initializeApp(config);
+        </script>
+
+        <script>
+
+            // counter for online cars...
+            var cars_count = 0;
+
+            // markers array to store all the markers, so that we could remove marker when any car goes offline and its data will be remove from realtime database...
+            var markers = [];
+            var map;
+            function initMap() { // Google Map Initialization...
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: new google.maps.LatLng(18.5697418,73.989927),
+                });
+            }
+
+            // This Function will create a car icon with angle and add/display that marker on the map
+            function AddCar(data) {
+
+                var uluru = { lat: data.val().latitude, lng: data.val().longitude };
+                console.log(uluru)
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+
+                markers[data.key] = marker; // add marker in the markers array...
+                document.getElementById("cars").innerHTML = cars_count;
+            }
+
+            // get firebase database reference...
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+              dd = '0' + dd;
+            }
+            if (mm < 10) {
+              mm = '0' + mm;
+            }
+            var dateToday = yyyy +'-' + mm + '-' + dd;
+            var cars_Ref = firebase.database().ref('/RealTimeMonitoring/' + dateToday);
+
+            // this event will be triggered when a new object will be added in the database...
+            cars_Ref.on('child_added', function (data) {
+                cars_count++;
+                AddCar(data);
+            });
+
+            // this event will be triggered on location change of any car...
+            cars_Ref.on('child_changed', function (data) {
+                markers[data.key].setMap(null);
+                AddCar(data);
+            });
+
+            // If any car goes offline then this event will get triggered and we'll remove the marker of that car...
+            cars_Ref.on('child_removed', function (data) {
+                markers[data.key].setMap(null);
+                cars_count--;
+                document.getElementById("cars").innerHTML = cars_count;
+            });
+
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap">
+        </script>
+
+    </body>
+</html>

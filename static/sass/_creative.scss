@@ -1,0 +1,66 @@
+/******** creative css start **********/
+.creative{
+    .creative_part_text{
+        padding-left: 60px;
+        @media #{$tab}{
+            padding-left: 0;
+        }
+        h2{
+            font-size: 46px;
+            line-height: 55px;
+            margin-bottom: 30px;
+            @media #{$tab}{
+                font-size: 30px;
+                line-height: 35px;
+                margin: 20px 0 10px;
+            }
+            @media #{$medium_device}{
+                font-size: 35px;
+                line-height: 40px;
+            }
+        }
+        span{
+            font-size: 24px;
+            line-height: 40px;
+            color: $black_color;
+            margin-top: 26px;
+            display: block;
+            @media #{$tab}{
+                font-size: 18px;
+                line-height: 25px;
+                margin: 20px 0 10px;
+            }
+            @media #{$medium_device}{
+                font-size: 18px;
+                line-height: 25px;
+            }
+        }
+        a{
+            display: flex;
+            margin-top: 58px;
+            align-items: center;
+            font-size: 16px;
+            color: $black_color;
+            text-transform: capitalize;
+            @media #{$tab}{
+                margin-top: 20px;
+            }
+            @media #{$medium_device}{
+                margin-top: 20px;
+            }
+            i{
+                height: 75px;
+                width: 75px;
+                line-height: 75px;
+                text-align: center;
+                border-radius: 50%;
+                color: $white_color;
+                background-color: $btn_hover;
+                display: inline-block;
+                font-size: 30px;
+                padding-left: 5px;
+                margin-right: 20px;
+            }
+        }
+    }
+}

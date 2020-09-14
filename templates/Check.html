@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<style>
+        div{
+        position : absolute;
+        right : 10px;
+        top : 5px
+        }
+    </style>
+</head>
+<body>
+<div>
+<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
+</div>
+<h2>Driver</h2>
+
+<br><br>
+{% for name,address,age,gender,date in comb_lis %}
+
+<h4>Name: {{name}}  &nbsp; Age: {{age}} &nbsp; Gender:{{gender}} &nbsp; Address: {{address}} &nbsp; Joining Date: {{date}}</h4>
+<br>
+
+{% endfor %}
+
+<h2>Bin</h2>
+<br><br>
+{% for latitude,longitude,capacity in comb_lis_bin %}
+<h4>Latitude:{{latitude}} &nbsp;Longitude: {{longitude}}&nbsp;Capacity:{{capacity}}</h4>
+<br>
+
+{% endfor %}
+
+</body>
+</html>
