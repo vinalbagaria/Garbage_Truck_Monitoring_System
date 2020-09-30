@@ -1,4 +1,4 @@
-# Garbage_Truck_Monitoring_System
+# Garbage_Truck_Monitoring_System - Awesome Website
 
 To run the project, first clone the repo or download the zip and execute the following command which will install the required packages
 > pip3 install -r requirements.txt
